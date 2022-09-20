@@ -484,3 +484,4 @@ if (game.ask("Drink the Ice Tea", "Walk 10 Miles")) {
         gameOver("The Dinosaur Eats You, YOU DIED")
     }
 }
+
