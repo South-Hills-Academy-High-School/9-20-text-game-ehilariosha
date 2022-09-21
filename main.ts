@@ -125,6 +125,46 @@ function gameOver (text: string) {
     game.showLongText(text, DialogLayout.Bottom)
     game.over(false)
 }
+function multipleChoice (choices: any[]) {
+    choice_A = sprites.create(img`
+        . . a . . 
+        . a . a . 
+        a . . . a 
+        a a a a a 
+        a . . . a 
+        `, SpriteKind.Player)
+    choice_A.setPosition(78, 58)
+    game.showLongText(choices[0], DialogLayout.Bottom)
+    choice_A.destroy()
+    choice_B = sprites.create(img`
+        c c c c . 
+        c . . . c 
+        c c c c . 
+        c . . . c 
+        c c c c . 
+        `, SpriteKind.Player)
+    choice_B.setPosition(78, 58)
+    game.showLongText(choices[1], DialogLayout.Bottom)
+    choice_B.destroy()
+    choice_C = sprites.create(img`
+        . b b b . 
+        b . . . b 
+        b . . . . 
+        b . . . b 
+        . b b b . 
+        `, SpriteKind.Player)
+    choice_C.setPosition(78, 58)
+    game.showLongText(choices[2], DialogLayout.Bottom)
+    choice_C.destroy()
+    choice = game.askForString("Make A Choice (A, B or C)")
+    while (!(choice == "A" || (choice == "B" || choice == "C"))) {
+        choice = game.askForString("Make A Choice (A, B or C)")
+    }
+}
+let choice = ""
+let choice_C: Sprite = null
+let choice_B: Sprite = null
+let choice_A: Sprite = null
 let mySprite: Sprite = null
 scene.setBackgroundImage(img`
     3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
@@ -483,8 +523,60 @@ if (game.ask("Drink the Ice Tea", "Walk 10 Miles")) {
     if (game.ask("Hand over 2$", "Hand Over Iced Tea")) {
         gameOver("The Dinosaur Eats You, YOU DIED")
     } else {
-        game.showLongText("The Dinosaur Says, \"Thank You Buddy, Felt Like I Was Gonna Drown There\". You Look at the Dino In A Confused Manner. The Dino Asks, \"Are You Lost Buddy? Do You Need A Ride?\"", DialogLayout.Bottom)
-        if (game.ask("I Need A Ride, I'm Lost", "I Know how To Get Around")) {
+        game.showLongText("The Dinosaur Says, \"Thank You Buddy, Felt Like I Was Gonna Die There\". You Look at the Dino In A Confused Manner. The Dino Asks, \"Are You Lost Buddy? Do You Need A Ride?\"", DialogLayout.Bottom)
+        if (game.ask("I Need A Ride, I'm Lost", "I Know How To Get Around")) {
+            sprites.create(img`
+                ........................
+                ........................
+                ...........ccc..........
+                ...........cccc.........
+                .......ccc..ccccccc.....
+                .......cccccc555555cc...
+                ........ccb5555555555c..
+                .....cc..b555555555555c.
+                .....cccb555555ff155555c
+                ......cb55555555ff55d55c
+                ......b5555555555555555c
+                ...cc.b555dd5555bb13bbc.
+                ...cccd55ddddd555b3335c.
+                .....bdddddddddd55b335c.
+                ..cccdddddb55bbddd5555c.
+                ..cccdddddb555bbbbcccc..
+                ...ccddddddb5555cbcdc...
+                ccccbdddddd5cb55cbcc....
+                cddddddddd5555ccbbc.....
+                .cddddddbdd555bbbcc.....
+                ..ccdddbbbdd55cbcdc.....
+                ....ccbbcbddddccdddcc...
+                ......cccdd555dcccccc...
+                ........cccccccc........
+                `, SpriteKind.Player).destroy()
+            mySprite = sprites.create(img`
+                ........................
+                ........................
+                ...........ccc..........
+                ...........cccc.........
+                .......ccc..ccccccc.....
+                .......cccccc555555cc...
+                ........ccb5555555555c..
+                .....cc..b555555555555c.
+                .....cccb555555ff155555c
+                ......cb55555555ff55d55c
+                ......b5555555555555555c
+                ...cc.b555dd5555bb13bbc.
+                ...cccd55ddddd555b3335c.
+                .....bdddddddddd55b335c.
+                ..cccdddddb55bbddd5555c.
+                ..cccdddddb555bbbbcccc..
+                ...ccddddddb5555cbcdc...
+                ccccbdddddd5cb55cbcc....
+                cddddddddd5555ccbbc.....
+                .cddddddbdd555bbbcc.....
+                ..ccdddbbbdd55cbcdc.....
+                ....ccbbcbddddccdddcc...
+                ......cccdd555dcccccc...
+                ........cccccccc........
+                `, SpriteKind.Player)
             scene.setBackgroundImage(img`
                 9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
                 9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
@@ -607,7 +699,7 @@ if (game.ask("Drink the Ice Tea", "Walk 10 Miles")) {
                 7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
                 7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
                 `)
-            game.showLongText("You Ride Off into the Sunset With the Dinosaur And Wake Up From Your Coma", DialogLayout.Bottom)
+            game.showLongText("You Ride Off Into The Sunset With the Dinosaur And Wake Up From Your Coma", DialogLayout.Bottom)
             game.over(true)
         } else {
             gameOver("You Wander Around Alone After Leaving The Dinosaur, You Keep On Wandering Until The Doctors In The World Of The Living Unplug Your Heart Beat Monitor, YOU DIED")
